@@ -1,0 +1,240 @@
+#include<iostream>
+using namespace std;
+
+struct node
+{
+	node* next;
+	int data;
+};
+
+void Insert(node* &start)
+{
+	node* ptr = start;
+	cout<<"Enter the value::\n";
+	int data;
+	cin>>data;
+	if(start==NULL)
+	{
+		start=new node;
+		start->data=data;
+		start->next=NULL;
+		return;
+	}
+	while(ptr->next!=NULL)
+	{
+		ptr=ptr->next;
+	}
+	ptr->next=new node;
+	ptr=ptr->next;
+	ptr->data=data;
+	ptr->next=NULL;
+		
+}
+
+InsertAtStart(node* &start)
+{
+	if(start!=NULL)
+	{
+		cout<<"Enter the value::\n";
+		int data;
+		cin>>data;
+		node* ptr=new node;
+		ptr->data=data;
+		ptr->next=start;
+		start=ptr;
+		cout<<"\n**************** INSERTION DONE ****************\n";
+	}
+	else
+	{
+		cout<<"\n**************** LINKLIST IS EMPTY ****************\n";
+	}
+	
+}
+
+Display(node* start)
+{
+/*	node* ptr=start;
+	cout<<"        ";
+	while(ptr!=NULL)
+		{
+		cout<<ptr->data<<" ";
+		ptr=ptr->next;
+	}
+*/	
+cout<<endl;	
+for(node *ptr=start; ptr!=NULL;ptr=ptr->next)
+	cout<<" "<<ptr->data<<" ";
+}
+
+InsertAny(node* &start)
+{
+	node* ptr= start,*ptr1;
+	int a,x;
+	cout<<"\nEnter the value to inseart::\n";
+	cin>>x;
+	cout<<"\nAfter which Value will You line to Enter::\n";
+	cin>>a;
+	ptr1=new node;
+	ptr1->data=x;
+	ptr1->next=NULL;
+
+	if(start!=NULL)
+	{
+		while((ptr->data!=a) && (ptr->next!=NULL))
+		{
+			ptr=ptr->next;
+		}
+		if(ptr!=NULL)
+		{
+			ptr1->next=ptr->next;
+			ptr->next=ptr1;
+			
+		}
+	}
+}
+
+void SingDel(node* &start)
+{
+	node* ptr=start, *ptr1;
+	int a;
+	if(start->next!=NULL)
+	{
+	
+	cout<<"\nEnter the value to DELETE :: \n";
+	
+	cin>>a;
+	if(start->data==a)
+	{
+		start=start->next;
+		return;
+	}
+}
+
+	else return;
+	while(ptr!=NULL)
+	{
+			
+		if(ptr->data==a)
+		{
+			ptr1->next=ptr->next;
+			delete(ptr);
+			cout<<"\n**************** VALUE DELETED ****************\n";
+			return;
+		}
+		ptr1=ptr;
+			ptr=ptr->next;
+	
+		
+	}
+		
+
+		cout<<"\n**************** LINKLIST IS EMPTY ****************\n";
+		
+	
+}
+
+void DeletionAtFirst(node* &start)
+{
+	node* ptr=start, *ptr1;
+	if(start==NULL)
+	{
+		cout<<"\n**************** LINKLIST IS EMPTY ****************\n";
+		return;
+	}
+			ptr=start->next;
+			delete(start);
+			start=ptr;
+			cout<<"\n**************** DELETION DONE **************** \n";
+			
+}
+
+void DeletionAtLast(node* &start)
+{
+	node* ptr=start,*ptr1;
+	if(start==NULL)
+	{
+		cout<<"\n**************** LINKLIST IS EMPTY ****************\n";
+		return;
+	}
+	while(ptr->next!=NULL)
+	{
+		ptr1=ptr;
+		ptr=ptr->next;
+	}
+	delete(ptr);
+	ptr1->next=NULL;
+	cout<<"\n**************** DELETION DONE **************** \n";	
+	}
+
+	Clear(node* &start)
+	{
+	node* ptr=start;
+	while(ptr!=NULL)
+	{
+		ptr=ptr->next;
+		delete(start);
+		start=ptr;
+    }
+    cout<<"\n**************** DATA CLEARED **************** \n";		
+	}
+
+main()
+{
+	node* start=NULL;
+	
+	while(1)
+	{
+		int x;
+		cout<<"\n\n 0.EXIT \n 1.INSERT \n 2.INSERT AT START \n 3.INSERT BY CHOISE \n 4.DISPLAY  \n 5.SINGLE VALUE DELETE \n 6.DELETION AT FIRST \n 7.DELETION AT LAST \n 8.CLEAR \n";
+		cout<<"\nEnter your choice:: ";
+		cin>>x;
+		
+		switch(x)
+		{
+			case 1:
+			//	for(int i=0;i<3;i++)
+				Insert(start);
+				break;
+				
+			case 2:
+				InsertAtStart(start);
+				break;
+			
+			case 3:
+				InsertAny(start);
+				break;
+	
+			case 4:
+				Display(start);
+				break;
+	
+			case 5:
+				SingDel(start);
+				break;		
+								
+			case 6:
+				DeletionAtFirst(start);
+				break;
+				
+			case 7:
+				DeletionAtLast(start);
+				break;
+				
+			case 8:
+				Clear(start);
+				break;
+				
+			case 0:
+				cout<<"\n\n**************** EXIT ****************\n";
+				exit(0);
+				break;
+				
+			default:
+				cout<<"\n**************** WRONG CHOICE ****************\n";
+				break;
+		}
+		system("pause");
+		system("CLS");
+		Display(start);		
+	}
+}
